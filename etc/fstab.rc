@@ -1,0 +1,3 @@
+#!/bin/sh
+cat etc/fstab >> /etc/fstab
+sudo mount -a
