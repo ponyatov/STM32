@@ -1,8 +1,12 @@
+GID = $(shell id -gn)
+UID = $(shell id -un)
+
 CWD = $(CURDIR)
 GZ = $(CWD)/gz
 SRC = $(CWD)/src
 TMP = $(CWD)/tmp
 TOOL = $(CWD)/tools
+MBED = $(CWD)/mbed
 
 CORES = $(shell grep processor /proc/cpuinfo|wc -l) 
 
@@ -27,16 +31,18 @@ XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
 
+zzz: ramdisk
+
 .PHONY: udev
 udev: /etc/udev/rules.d/49-stlink.rules
 /etc/udev/rules.d/49-stlink.rules: $(CWD)/etc/udev/rules.d/49-stlink.rules
 ifeq ($(shell egrep -q "^stlink:" /etc/group),0)
 	sudo addgroup stlink
 endif
-	sudo cp $< $@
+	sudo sed "s/_MBED/$(subst /,\/,$(MBED))/g ; s/_USER/$(USER)/g; w $@" $<
 	sudo /etc/init.d/udev reload
 	ls /dev/stlink* /dev/sdb ; mount
-
+	
 .PHONY: all
 all: packs stlink/README.md $(TOOL)/include/libusb-1.0/libusb.h
 	cd stlink ; $(XPATH) CC=gcc CXX=g++ $(MAKE) CMAKEFLAGS="LIBUSB_LIBRARY=$(TOOL)/lib LIBUSB_INCLUDE_DIR=$(TOOL)/include" clean release
@@ -62,10 +68,12 @@ packs: /usr/include/libusb-1.0/libusb.h /usr/include/libudev.h \
 	sudo apt install libudev-dev
 
 .PHONY: ramdisk
-ramdisk: /home/$(USER)/src /home/$(USER)/tmp etc/fstab
-	sudo sh etc/fstab.rc
-etc/fstab: etc/fstab.mk
-	$(MAKE) -f $< && touch $@
+ramdisk: etc/fstab $(SRC) $(TMP) 
+	sudo $(MAKE) /etc/fstab
+/etc/fstab: etc/fstab Makefile
+	sed "s/_SRC/$(subst /,\/,$(SRC))/g ; s/_TMP/$(subst /,\/,$(TMP))/g ; s/_UID/$(UID)/g ; s/_GID/$(GID)/g " $< >> $@
+	vim $@
+	mount -a 
 
 $(TOOL)/bin/cmake: $(SRC)/$(CMAKE_DIR)/configure
 	rm -rf $(TMP)/$(CMAKE_DIR) ; mkdir $(TMP)/$(CMAKE_DIR) ; cd $(TMP)/$(CMAKE_DIR) ;\
