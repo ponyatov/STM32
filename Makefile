@@ -36,6 +36,7 @@ udev: /etc/udev/rules.d/49-stlink.rules
 /etc/udev/rules.d/49-stlink.rules: $(CWD)/etc/udev/rules.d/49-stlink.rules
 ifeq ($(shell egrep -q "^stlink:" /etc/group),0)
 	sudo addgroup stlink
+	sudo adduser $(USER) stlink
 endif
 	sudo sed "s/_MBED/$(subst /,\/,$(MBED))/g ; s/_USER/$(USER)/g; w $@" $<
 	sudo /etc/init.d/udev reload
