@@ -1,0 +1,16 @@
+# STmicroelectronics STlink connection trigger
+
+# stm32 nucleo boards, and STM32F7GDISCO
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", \
+    MODE:="0660", GROUP:="stlink", \
+    SYMLINK+="stlinkv21_%n"
+
+ACTION=="add",SYMLINK=="stlinkv21_",RUN+="/bin/mount -o gid=stlink,uid=ponyatov /dev/stlinkv21_ /home/ponyatov/STM32/mbed"
+ACTION=="remove",SYMLINK=="stlinkv21_",RUN+="/bin/umount /home/ponyatov/STM32/mbed"
+
+# STM32 Discovery boards with onboard STlink v.1
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", \
+    MODE:="0666", \
+    SYMLINK+="stlinkv1_%n"

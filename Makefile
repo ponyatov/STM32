@@ -27,6 +27,16 @@ XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
 
+.PHONY: udev
+udev: /etc/udev/rules.d/49-stlink.rules
+/etc/udev/rules.d/49-stlink.rules: $(CWD)/etc/udev/rules.d/49-stlink.rules
+ifeq ($(shell egrep -q "^stlink:" /etc/group),0)
+	sudo addgroup stlink
+endif
+	sudo cp $< $@
+	sudo /etc/init.d/udev reload
+	ls /dev/stlink* /dev/sdb ; mount
+
 .PHONY: all
 all: packs stlink/README.md $(TOOL)/include/libusb-1.0/libusb.h
 	cd stlink ; $(XPATH) CC=gcc CXX=g++ $(MAKE) CMAKEFLAGS="LIBUSB_LIBRARY=$(TOOL)/lib LIBUSB_INCLUDE_DIR=$(TOOL)/include" clean release
