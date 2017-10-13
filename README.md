@@ -4,6 +4,15 @@
 - arm-none-eabi GNU toolchain
 - mbed intergration
 
+github: https://github.com/ponyatov/STM32.git
+
+### Installation
+
+```
+$ cd ~
+$ git clone -o gh https://github.com/ponyatov/STM32.git
+```
+
 ### BSP kit: Board Support Packages
 
 - [32F746GDISCOVERY](http://www.st.com/en/evaluation-tools/32f746gdiscovery.html)
