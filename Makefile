@@ -12,12 +12,28 @@ CMAKE_GZ = $(CMAKE_DIR).tar.gz
 CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
 
 CMAKE = $(TOOL)/bin/cmake
+# system
+CMAKE = /usr/bin/cmake
 
 XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 .PHONY: all
-all: stlink/README.md $(CMAKE)
-	$(XPATH) which cmake
+all: packs stlink/README.md
+#	$(XPATH) which cmake
+	
+.PHONY: packs
+packs: /usr/include/libusb-1.0/libusb.h \
+	/usr/bin/make /usr/bin/gcc /usr/bin/g++ $(CMAKE)
+/usr/include/libusb-1.0/libusb.h:
+	sudo apt install libusb-1.0-0-dev
+/usr/bin/make:
+	sudo apt install make
+/usr/bin/cmake:
+	sudo apt install cmake
+/usr/bin/gcc:
+	sudo apt install gcc
+/usr/bin/g++:
+	sudo apt install g++
 
 .PHONY: ramdisk
 ramdisk: /home/$(USER)/src /home/$(USER)/tmp etc/fstab
@@ -25,7 +41,7 @@ ramdisk: /home/$(USER)/src /home/$(USER)/tmp etc/fstab
 etc/fstab: etc/fstab.mk
 	$(MAKE) -f $< && touch $@
 
-$(CMAKE): $(SRC)/$(CMAKE_DIR)/configure
+$(TOOL)/bin/cmake: $(SRC)/$(CMAKE_DIR)/configure
 	rm -rf $(TMP)/$(CMAKE_DIR) ; mkdir $(TMP)/$(CMAKE_DIR) ; cd $(TMP)/$(CMAKE_DIR) ;\
 	$< --prefix=$(TOOL) --parallel=$(CORES) && $(MAKE) -j$(CORES) && $(MAKE) install
 
