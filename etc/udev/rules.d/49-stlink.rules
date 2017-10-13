@@ -20,4 +20,5 @@ ACTION=="remove",SYMLINK=="stlinkv1_",RUN+="/bin/umount -f _MBED"
 
 # VCP serial line
 
-KERNEL=="ttyACM*", ATTRS{interface}=="ST-Link VCP Ctr", SYMLINK+="stlink_vcp", MODE:="0660", GROUP:="stlink", RUN+="/bin/stty -F /dev/%k -icrnl"
+KERNEL=="ttyACM*", ATTRS{interface}=="ST-Link VCP Ctr", SYMLINK+="stlink_vcp", MODE:="0660", GROUP:="stlink"
+#, RUN+="/bin/stty -F /dev/%k -icrnl"
