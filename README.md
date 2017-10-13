@@ -11,6 +11,8 @@ github: https://github.com/ponyatov/STM32.git
 ```
 $ cd ~
 $ git clone -o gh https://github.com/ponyatov/STM32.git
+$ cd STM32
+$ make
 ```
 
 ### BSP kit: Board Support Packages
