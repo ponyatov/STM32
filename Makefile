@@ -31,8 +31,6 @@ XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
 
-zzz: ramdisk
-
 .PHONY: udev
 udev: /etc/udev/rules.d/49-stlink.rules
 /etc/udev/rules.d/49-stlink.rules: $(CWD)/etc/udev/rules.d/49-stlink.rules
