@@ -2,16 +2,22 @@ CWD = $(CURDIR)
 GZ = $(CWD)/gz
 SRC = $(CWD)/src
 TMP = $(CWD)/tmp
+TOOL = $(CWD)/tools
+
+CORES = $(shell grep processor /proc/cpuinfo|wc -l) 
 
 CMAKE_VER = 3.9.4
 CMAKE_DIR = cmake-$(CMAKE_VER)
 CMAKE_GZ = $(CMAKE_DIR).tar.gz
 CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
 
-CMAKE = $(CWD)/tools/bin/cmake
+CMAKE = $(TOOL)/bin/cmake
+
+XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 .PHONY: all
 all: stlink/README.md $(CMAKE)
+	$(XPATH) which cmake
 
 .PHONY: ramdisk
 ramdisk: /home/$(USER)/src /home/$(USER)/tmp etc/fstab
@@ -21,7 +27,7 @@ etc/fstab: etc/fstab.mk
 
 $(CMAKE): $(SRC)/$(CMAKE_DIR)/configure
 	rm -rf $(TMP)/$(CMAKE_DIR) ; mkdir $(TMP)/$(CMAKE_DIR) ; cd $(TMP)/$(CMAKE_DIR) ;\
-	$< --help
+	$< --prefix=$(TOOL) --parallel=$(CORES) && $(MAKE) -j$(CORES) && $(MAKE) install
 
 # source unpack rules
 $(SRC)/%/configure: $(GZ)/%.tar.gz
