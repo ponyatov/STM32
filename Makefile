@@ -5,8 +5,13 @@ CMAKE_VER = 3.9.4
 CMAKE_GZ = cmake-$(CMAKE_VER).tar.gz
 CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
 
+CMAKE = /usr/local/bin/cmake
+
 .PHONY: all
-all: stlink/README.md $(GZ)/$(CMAKE_GZ)
+all: stlink/README.md $(CMAKE)
+
+$(CMAKE): $(GZ)/$(CMAKE_GZ)
+	echo $< $@
 
 WGET = wget -c
 $(GZ)/$(CMAKE_GZ):
