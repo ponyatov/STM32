@@ -10,18 +10,19 @@ MBED = $(CWD)/mbed
 
 CORES = $(shell grep processor /proc/cpuinfo|wc -l) 
 
-CMAKE_VER = 3.9.4
-CMAKE_DIR = cmake-$(CMAKE_VER)
-CMAKE_GZ = $(CMAKE_DIR).tar.gz
-CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
-
 LIBUSB_VER = 1.0.21
 LIBUSB_DIR = libusb-$(LIBUSB_VER)
 LIBUSB_GZ = $(LIBUSB_DIR).tar.bz2
 LIBUSB_URL = https://downloads.sourceforge.net/project/libusb/libusb-1.0/$(LIBUSB_DIR)/$(LIBUSB_GZ)
 
 STLINK_VER = 1.4.0
-STLINK_URL = https://github.com/texane/stlink/archive/$(STLINK_VER) .tar.gz
+STLINK_GZ = stlink-$(STLINK_VER).tar.gz
+STLINK_URL = https://github.com/texane/stlink/archive/$(STLINK_VER).tar.gz
+
+CMAKE_VER = 3.9.4
+CMAKE_DIR = cmake-$(CMAKE_VER)
+CMAKE_GZ = $(CMAKE_DIR).tar.gz
+CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
 
 CMAKE = $(TOOL)/bin/cmake
 # system
@@ -30,6 +31,9 @@ CMAKE = $(TOOL)/bin/cmake
 XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
+
+$(GZ)/$(STLINK_GZ):
+	$(WGET) -O $@ $(STLINK_URL)
 
 .PHONY: udev
 udev: /etc/udev/rules.d/49-stlink.rules
