@@ -1,5 +1,7 @@
 # STmicroelectronics STlink connection trigger
 
+# sudo ln -fs /home/ponyatov/dotfiles/udev/STlink /etc/udev/rules.d/49-STlink.rules
+
 # stm32 nucleo boards, and STM32F7GDISCO
 
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", \

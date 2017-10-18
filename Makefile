@@ -16,7 +16,8 @@ LIBUSB_GZ = $(LIBUSB_DIR).tar.bz2
 LIBUSB_URL = https://downloads.sourceforge.net/project/libusb/libusb-1.0/$(LIBUSB_DIR)/$(LIBUSB_GZ)
 
 STLINK_VER = 1.4.0
-STLINK_GZ = stlink-$(STLINK_VER).tar.gz
+STLINK_DIR = stlink-$(STLINK_VER)
+STLINK_GZ = $(STLINK_DIR).tar.gz
 STLINK_URL = https://github.com/texane/stlink/archive/$(STLINK_VER).tar.gz
 
 CMAKE_VER = 3.9.4
@@ -32,12 +33,9 @@ XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
 
-$(GZ)/$(STLINK_GZ):
-	$(WGET) -O $@ $(STLINK_URL)
-
 .PHONY: udev
-udev: /etc/udev/rules.d/49-stlink.rules
-/etc/udev/rules.d/49-stlink.rules: $(CWD)/etc/udev/rules.d/49-stlink.rules
+udev: /etc/udev/rules.d/49-STlink.rules
+/etc/udev/rules.d/49-STlink.rules: $(CWD)/etc/udev/rules.d/49-STlink.rules
 ifeq ($(shell egrep -q "^stlink:" /etc/group),0)
 	sudo addgroup stlink
 	sudo adduser $(USER) stlink
@@ -47,10 +45,16 @@ endif
 	ls /dev/stlink* /dev/sdb ; mount
 	
 .PHONY: all
-all: packs stlink/README.md $(TOOL)/include/libusb-1.0/libusb.h
-	cd stlink ; $(XPATH) CC=gcc CXX=g++ $(MAKE) CMAKEFLAGS="LIBUSB_LIBRARY=$(TOOL)/lib LIBUSB_INCLUDE_DIR=$(TOOL)/include" clean release
-#	$(CMAKE) --version
-#	cd stlink ; $(XPATH) CC=clang CXX=clang++ $(MAKE) clean release
+all: $(TOOL)/bin/stlink
+$(TOOL)/bin/stlink: $(SRC)/$(STLINK_DIR)/configure
+	cd $(SRC)/$(STLINK_DIR) ; $(MAKE) clean ;\
+	$(MAKE) -j$(CORES) && $(MAKE) install DESTDIR=$(TOOL)
+
+#.PHONY: all
+#all: packs $(TOOL)/include/libusb-1.0/libusb.h
+#	cd stlink ; $(XPATH) CC=gcc CXX=g++ $(MAKE) CMAKEFLAGS="LIBUSB_LIBRARY=$(TOOL)/lib LIBUSB_INCLUDE_DIR=$(TOOL)/include" clean release
+##	$(CMAKE) --version
+##	cd stlink ; $(XPATH) CC=clang CXX=clang++ $(MAKE) clean release
 	
 .PHONY: packs
 packs: /usr/include/libusb-1.0/libusb.h /usr/include/libudev.h \
@@ -92,10 +96,9 @@ $(SRC)/%/configure: $(GZ)/%.tar.gz
 $(SRC)/%/configure: $(GZ)/%.tar.bz2
 	cd src ; bzcat $< | tar x && touch $@
 
+$(GZ)/$(STLINK_GZ):
+	$(WGET) -O $@ $(STLINK_URL)
 $(GZ)/$(CMAKE_GZ):
 	$(WGET) -O $@ $(CMAKE_URL)
 $(GZ)/$(LIBUSB_GZ):
 	$(WGET) -O $@ $(LIBUSB_URL)
-
-stlink/README.md:
-	git clone -o gh --depth=1 https://github.com/texane/stlink.git
