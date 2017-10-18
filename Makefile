@@ -19,6 +19,8 @@ STLINK_TAG = 1.4.0
 STLINK_GITHUB = git@github.com:ponyatov/stlink.git
 STLINK_BRANCH = ponyatov_140
 
+STLINK = LD_LIBRARY_PATH=$(TOOL)/lib $(TOOL)/bin/st-util
+
 CMAKE_VER = 3.9.4
 CMAKE_DIR = cmake-$(CMAKE_VER)
 CMAKE_GZ = $(CMAKE_DIR).tar.gz
@@ -36,12 +38,19 @@ WGET = wget -c
 all: stlink
 
 .PHONY: stlink
-stlink: $(TOOL)/bin/st-util
-$(TOOL)/bin/st-util: stlink/README_ponyatov.md packs
-	cd stlink ; $(MAKE) clean ; $(MAKE) \
-		DESTDIR=$(TMP) CMAKEFLAGS="-DCMAKE_INSTALL_PREFIX=/stlink" \
-		install &&\
-	cp -r $(TMP)/stlink/* $(TOOL)/
+stlink: $(TOOL)/bin/st-util /etc/modprobe.d/stlink_v1.conf
+#	$(STLINK)
+etc/modprobe.d/stlink_v1.conf: $(TMP)/etc/modprobe.d/stlink_v1.conf
+	cp $< $@	
+/etc/modprobe.d/stlink_v1.conf: etc/modprobe.d/stlink_v1.conf
+	sudo cp $< $@
+STLINK_CFG = -DCMAKE_INSTALL_PREFIX=/stlink
+#STLINK_CFG += -DBUILD_SHARED_LIBRARIES=OFF
+#STLINK_CFG += -DCMAKE_EXE_LINKER_FLAGS=-static
+$(TOOL)/bin/st-util: stlink/README_ponyatov.md /usr/include/libusb-1.0/libusb.h
+	cd stlink ; $(MAKE) clean ;\
+	$(MAKE) DESTDIR=$(TMP) CMAKEFLAGS="$(STLINK_CFG)" install &&\
+	cp -r $(TMP)/stlink/* $(TOOL)/ 
 stlink/README_ponyatov.md: stlink/README.md
 	cd stlink ; git checkout $(STLINK_BRANCH)
 stlink/README.md:
