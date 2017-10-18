@@ -1,0 +1,10 @@
+# Freescale FRDM-KL25Z demo board
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1357", ATTRS{idProduct}=="0707", \
+    MODE:="0660", GROUP:="stlink", \
+    SYMLINK+="frdm_%n"
+
+KERNEL=="ttyACM*", \
+	ATTRS{idVendor}=="1357", ATTRS{idProduct}=="0707", \
+	SYMLINK+="frdm_vcp", MODE:="0660", GROUP:="stlink"
+    

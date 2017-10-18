@@ -39,7 +39,7 @@ all: stlink
 
 .PHONY: stlink
 stlink: $(TOOL)/bin/st-util /etc/modprobe.d/stlink_v1.conf
-#	$(STLINK)
+	$(STLINK)
 etc/modprobe.d/stlink_v1.conf: $(TMP)/etc/modprobe.d/stlink_v1.conf
 	cp $< $@	
 /etc/modprobe.d/stlink_v1.conf: etc/modprobe.d/stlink_v1.conf
@@ -57,7 +57,9 @@ stlink/README.md:
 	git clone -o gh $(STLINK_GITHUB)
 
 .PHONY: udev
-udev: /etc/udev/rules.d/49-STlink.rules
+udev: /etc/udev/rules.d/49-STlink.rules /etc/udev/rules.d/49-FRDM.rules
+/etc/udev/rules.d/49-FRDM.rules: $(CWD)/etc/udev/rules.d/49-FRDM.rules
+	sudo cp $< $@ ; sudo /etc/init.d/udev reload
 /etc/udev/rules.d/49-STlink.rules: $(CWD)/etc/udev/rules.d/49-STlink.rules
 ifeq ($(shell egrep -q "^stlink:" /etc/group),0)
 	sudo addgroup stlink
