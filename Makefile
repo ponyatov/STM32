@@ -26,7 +26,7 @@ CMAKE_URL = https://cmake.org/files/v3.9/$(CMAKE_GZ)
 
 CMAKE = $(TOOL)/bin/cmake
 # system
-#CMAKE = /usr/bin/cmake
+CMAKE = /usr/bin/cmake
 
 XPATH = PATH=$(TOOL)/bin:$(PATH)
 
@@ -37,7 +37,7 @@ all: stlink
 
 .PHONY: stlink
 stlink: $(TOOL)/bin/st-util
-$(TOOL)/bin/st-util: stlink/README_ponyatov.md
+$(TOOL)/bin/st-util: stlink/README_ponyatov.md packs
 	cd stlink ; $(MAKE) clean ; $(MAKE) \
 		DESTDIR=$(TMP) CMAKEFLAGS="-DCMAKE_INSTALL_PREFIX=/stlink" \
 		install &&\
@@ -65,8 +65,8 @@ endif
 ##	cd stlink ; $(XPATH) CC=clang CXX=clang++ $(MAKE) clean release
 	
 .PHONY: packs
-packs: /usr/include/libusb-1.0/libusb.h /usr/include/libudev.h \
-	/usr/bin/make /usr/bin/clang /usr/bin/clang++ $(CMAKE)
+packs: /usr/bin/make $(CMAKE)
+#/usr/include/libusb-1.0/libusb.h /usr/include/libudev.h
 /usr/include/libusb-1.0/libusb.h:
 	sudo apt install libusb-1.0-0-dev
 /usr/bin/make:
@@ -77,8 +77,6 @@ packs: /usr/include/libusb-1.0/libusb.h /usr/include/libudev.h \
 	sudo apt install gcc
 /usr/bin/g++:
 	sudo apt install g++
-/usr/bin/clang /usr/bin/clang++:
-	sudo apt install clang
 /usr/include/libudev.h:
 	sudo apt install libudev-dev
 
