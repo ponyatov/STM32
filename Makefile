@@ -15,10 +15,9 @@ LIBUSB_DIR = libusb-$(LIBUSB_VER)
 LIBUSB_GZ = $(LIBUSB_DIR).tar.bz2
 LIBUSB_URL = https://downloads.sourceforge.net/project/libusb/libusb-1.0/$(LIBUSB_DIR)/$(LIBUSB_GZ)
 
-STLINK_VER = 1.4.0
-STLINK_DIR = stlink-$(STLINK_VER)
-STLINK_GZ = $(STLINK_DIR).tar.gz
-STLINK_URL = https://github.com/texane/stlink/archive/$(STLINK_VER).tar.gz
+STLINK_TAG = 1.4.0
+STLINK_GITHUB = git@github.com:ponyatov/stlink.git
+STLINK_BRANCH = ponyatov_140
 
 CMAKE_VER = 3.9.4
 CMAKE_DIR = cmake-$(CMAKE_VER)
@@ -33,6 +32,21 @@ XPATH = PATH=$(TOOL)/bin:$(PATH)
 
 WGET = wget -c
 
+.PHONY: all
+all: stlink
+
+.PHONY: stlink
+stlink: $(TOOL)/bin/st-util
+$(TOOL)/bin/st-util: stlink/README_ponyatov.md
+	cd stlink ; $(MAKE) clean ; $(MAKE) \
+		DESTDIR=$(TMP) CMAKEFLAGS="-DCMAKE_INSTALL_PREFIX=/stlink" \
+		install &&\
+	cp -r $(TMP)/stlink/* $(TOOL)/
+stlink/README_ponyatov.md: stlink/README.md
+	cd stlink ; git checkout $(STLINK_BRANCH)
+stlink/README.md:
+	git clone -o gh $(STLINK_GITHUB)
+
 .PHONY: udev
 udev: /etc/udev/rules.d/49-STlink.rules
 /etc/udev/rules.d/49-STlink.rules: $(CWD)/etc/udev/rules.d/49-STlink.rules
@@ -44,12 +58,6 @@ endif
 	sudo /etc/init.d/udev reload
 	ls /dev/stlink* /dev/sdb ; mount
 	
-.PHONY: all
-all: $(TOOL)/bin/stlink
-$(TOOL)/bin/stlink: $(SRC)/$(STLINK_DIR)/configure
-	cd $(SRC)/$(STLINK_DIR) ; $(MAKE) clean ;\
-	$(MAKE) -j$(CORES) && $(MAKE) install DESTDIR=$(TOOL)
-
 #.PHONY: all
 #all: packs $(TOOL)/include/libusb-1.0/libusb.h
 #	cd stlink ; $(XPATH) CC=gcc CXX=g++ $(MAKE) CMAKEFLAGS="LIBUSB_LIBRARY=$(TOOL)/lib LIBUSB_INCLUDE_DIR=$(TOOL)/include" clean release
@@ -96,8 +104,8 @@ $(SRC)/%/configure: $(GZ)/%.tar.gz
 $(SRC)/%/configure: $(GZ)/%.tar.bz2
 	cd src ; bzcat $< | tar x && touch $@
 
-$(GZ)/$(STLINK_GZ):
-	$(WGET) -O $@ $(STLINK_URL)
+#$(GZ)/$(STLINK_GZ):
+#	$(WGET) -O $@ $(STLINK_URL)
 $(GZ)/$(CMAKE_GZ):
 	$(WGET) -O $@ $(CMAKE_URL)
 $(GZ)/$(LIBUSB_GZ):
