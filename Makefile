@@ -1,3 +1,9 @@
+# tool
+CURL   = curl -L -o
+CF     = clang-format
+
+# src
+C += $(wildcard src/*.c??)
 
 # all
 .PHONY: all
