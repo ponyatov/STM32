@@ -14,7 +14,11 @@ C += $(wildcard src/*.c??)
 
 # all
 .PHONY: all
-all:
+all: qemu
+
+.PHONY: qemu
+qemu: bin/none
+	qemu-system-arm -M -kernel $<
 
 # format
 .PHONY: format
@@ -35,9 +39,8 @@ STLINK_DEB = stlink_$(STLINK_VER)-1_amd64.deb
 .PHONY: gz
 gz: $(STINFO)
 
-$(STINFO):
-	$(MAKE) $(GZ)/$(STLINK_DEB)
-	sudo dpkg -i $<
+$(STINFO): $(GZ)/$(STLINK_DEB)
+	sudo dpkg -i $< && sudo touch $@
 
 $(GZ)/$(STLINK_DEB):
 	$(CURL) $@ https://github.com/stlink-org/stlink/releases/download/v$(STLINK_VER)/$(STLINK_DEB)
