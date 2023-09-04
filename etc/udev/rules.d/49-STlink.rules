@@ -1,0 +1,26 @@
+# STmicroelectronics STlink connection trigger
+
+# sudo ln -fs /home/ponyatov/dotfiles/udev/STlink /etc/udev/rules.d/49-STlink.rules
+
+# stm32 nucleo boards, and STM32F7GDISCO
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", \
+    MODE:="0660", GROUP:="stlink", \
+    SYMLINK+="stlinkv21_%n"
+
+ACTION=="add",SYMLINK=="stlinkv21_",RUN+="/bin/mount -n -o sync,gid=stlink,uid=_USER /dev/stlinkv21_ _MBED"
+ACTION=="remove",SYMLINK=="stlinkv21_",RUN+="/bin/umount -f _MBED"
+
+# STM32 Discovery boards with onboard STlink v.1
+
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", \
+    MODE:="0660", \
+    SYMLINK+="stlinkv1_%n"
+
+ACTION=="add",SYMLINK=="stlinkv1_",RUN+="/bin/mount -n -o sync,gid=stlink,uid=_USER /dev/stlinkv21_ _MBED"
+ACTION=="remove",SYMLINK=="stlinkv1_",RUN+="/bin/umount -f _MBED"
+
+# VCP serial line
+
+KERNEL=="ttyACM*", ATTRS{interface}=="ST-Link VCP Ctr", SYMLINK+="stlink_vcp", MODE:="0660", GROUP:="stlink"
+#, RUN+="/bin/stty -F /dev/%k -icrnl"

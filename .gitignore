@@ -1,0 +1,9 @@
+*~
+*.swp
+*.log
+.*.html
+wiki/
+stlink/
+gz/
+tools/
+mbed/
