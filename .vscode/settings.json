@@ -19,4 +19,15 @@
     "explorer.autoReveal": false,
     "files.insertFinalNewline": true,
     "git.enabled": false,    
+
+    // cmake
+    "cmake.buildDirectory":  "${workspaceFolder}/tmp/${workspaceFolderBasename}",
+    "cmake.sourceDirectory": "${workspaceFolder}",
+    "cmake.configureArgs": [ "-DAPP=${workspaceFolderBasename}" ],
+    "cmake.debugConfig": {
+	    "cwd": "${workspaceFolder}",
+        "args": ["${workspaceFolder}/lib/${workspaceFolderBasename}.ini"]
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.generator": "Unix Makefiles"
 }

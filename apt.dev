@@ -1,3 +1,4 @@
 code meld doxygen clang-format
 gcc-arm-none-eabi gdb-arm-none-eabi
-openocd
+stlink openocd
+cmake ragel
