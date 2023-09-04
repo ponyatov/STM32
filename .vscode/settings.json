@@ -20,6 +20,13 @@
     "files.insertFinalNewline": true,
     "git.enabled": false,    
 
+    // C++
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.formatOnSave":     true
+    },
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+
     // cmake
     "cmake.buildDirectory":  "${workspaceFolder}/tmp/${workspaceFolderBasename}",
     "cmake.sourceDirectory": "${workspaceFolder}",
