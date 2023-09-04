@@ -24,7 +24,9 @@ tmp/format_cpp: $(C) $(H)
 
 # install
 .PHONY: install update
-install update:
+install: gz
+	$(MAKE) update
+update:
 	sudo apt update
 	sudo apt install -yu `cat apt.txt apt.dev`
 
