@@ -1,5 +1,15 @@
 # `stm32`
-## Cortex-M compiler toolchain
+## Cortex-M project template
+
+(c) Dmitry Ponyatov <<dponyatov@gmail.com>> 2024 MIT
+
+https://gitflic.ru/project/dponyatov/stm32
+
+- VSCode configuration
+- GNU make setup
+    - cross-compiler config for multiple target boards
+    - modular Makefile
+- custom libraries set
 
 ## [[STM32]] [[BSP]]
 
