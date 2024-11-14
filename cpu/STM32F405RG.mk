@@ -1,0 +1,1 @@
+ARCH = Cortex-M4
