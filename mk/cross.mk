@@ -19,6 +19,7 @@ include   hw/$(DESCR)_$(CHIPID).mk
 include   hw/$(HW).mk
 include  cpu/$(CPU).mk
 include arch/$(ARCH).mk
+include   os/$(OS).mk
 endif
 
 # cross-compiler
