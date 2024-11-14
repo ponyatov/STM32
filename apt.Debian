@@ -1,4 +1,3 @@
 git make curl
 code meld doxygen clang-format
 g++ flex bison libreadline-dev ragel
-gcc-arm-none-eabi gdb-multiarch stlink-tools qemu-system-arm

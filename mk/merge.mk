@@ -1,5 +1,5 @@
 # merge
-MERGE += README.md Makefile apt.txt .clang-format .doxygen
+MERGE += README.md LICENSE Makefile apt.txt .clang-format .doxygen
 MERGE += .vscode bin doc lib inc src tmp ref mk
 MERGE += hw cpu arch os
 
