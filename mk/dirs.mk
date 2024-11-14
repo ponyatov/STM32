@@ -5,4 +5,6 @@ CROSS = $(HOME)/distr/cross
 endif
 BIN   = $(CWD)/bin
 LIB   = $(CWD)/lib
+INC   = $(CWD)/inc
+SRC   = $(CWD)/src
 TMP   = $(CWD)/tmp

@@ -15,4 +15,4 @@ EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 LAYOUT_FILE            = doc/DoxygenLayout.xml
 SORT_GROUP_NAMES       = YES
-REPEAT_BRIEF           = NO
+REPEAT_BRIEF           = YES
