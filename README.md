@@ -1,117 +1,33 @@
-# stm32
+# `stm32`
+## Cortex-M compiler toolchain
 
-***
-##  С чего начать?
-Для того, чтобы облегчить знакомство с сервисом GitFlic и первые шаги в нём, мы подготовили несколько рекомендаций.  
-Уже опытный пользователь? Отредактируйте данный **README** файл по своему усмотрению.  
-Не знаете что добавить в него? Перейдите в раздел `"Что должен содержать README файл"`, в котором описаны ключевые компоненты хорошего README файла. 
+## [[STM32]] [[BSP]]
 
-## Добавьте свои файлы
-Если вы решили начать разработку проекта с создания репозитория в нашем сервисе, тогда клонируйте себе данный репозиторий следующим образом:
+свежие выкачаные архивы пакетов поддкржки f0/c0/f1/f4/g0/g4/h7 для stm32_cube_mx и он сам для linux64 
 
+https://caxapa.ru/1474346.html
+https://cloud.mail.ru/public/2i19/Y4w8kKEiZ/CubeMX
 
-```
-git clone https://gitflic.ru/project/dponyatov/stm32.git
-cd stm32
-**добавьте первые файлы вашего проекта**
-git add .
-git commit -m "Первый коммит"
-git push -u origin master
-```
+### rutracker
 
-Уже что-то делали в проекте? В таком случае инициализируйте гит-репозиторий в корне проекта и добавьте текущий репозиторий как удалённый репозиторий:
+https://rutracker.org/forum/viewtopic.php?t=6505230
+https://rutracker.org/forum/viewtopic.php?t=6472732
 
-```
-cd existing_folder
-git init
-git remote add origin https://gitflic.ru/project/dponyatov/stm32.git
-git clone
-**добавьте новые файлы**
-git add .
-git commit -m "Новый коммит"
-git push -u origin master
-```
-***
+### Pro.Embedded Magnet seed
 
+https://t.me/proembedded/638186
 
-# Что должен содержать README файл
-
-
-Прежде всего, стоит понимать, что `README.md` — это краткая документация. Это первое, что видит человек, который открывает репозиторий. Поэтому здесь важно дать достаточно информации о проекте и рассказать, что он из себя представляет.
-Ключевая информация, которую должен содержать README файл:
-
-## Название и описание
-Название проекта должно быть простым и понятным (чаще всего это одно слово).
-Описание должно описывать основные функции проекта, включая его особенности и назначение. 
-Если у вашего проекта есть альтернативные проекты, то в описании можно перечислить ключевые отличия, которые выделяют ваш проект на фоне всех остальных.
-
-## Установка и настройка
-Также в `README` файле рекомендуется перечислить необходимые инструкции для установки, 
-будь то использование пакетных менеджеров (например, `Homebrew` на MacOS или `apt` на Linux), 
-зависимости, которые могут понадобиться в ходе использования, а также шаги по их настройке.
-
-## Совместная разработка
-Можно добавить информацию о том, как принять участие в разработке вашего проекта, как стать непосредственным участником, правила оформления pull-requests и т.д.
-
-## Контакты
-Ссылки на внешние ресурсы, такие как документация, блог, страница проекта в социальных сетях, сообщество проекта и т.д.
-
-## Статус проекта
-В данном разделе рекомендуется указывать, на какой стадии находится проект, активно разрабатывается или находится в стадии застоя.
-Если же проект готов и во всю используется, можно указывать актуальную версию, а также последние изменения, которые были сделаны с момента предыдущего релиза.
-
-***
-
-# Полезные ссылки
-
-***
-
-## Работа с проектом
-
-- [ ] [Как создать проект](https://docs.gitflic.space/project/project_create)
-- [ ] [Как импортировать проект](https://docs.gitflic.space/project/import_base)
-- [ ] [Запросы на слияние](https://docs.gitflic.space/project/merge_request)
-- [ ] [Зеркалирование проекта](https://docs.gitflic.space/project/mirror)
-- [ ] [Импортировать проект с GitLab](https://docs.gitflic.space/project/import)
-
-## Команды
-- [ ] [Создание команды](https://docs.gitflic.space/team/create)
-- [ ] [Обзор команды](https://docs.gitflic.space/team/view)
-- [ ] [Настройка команды](https://docs.gitflic.space/team/settings)
-
-## Реестр пакетов
-- [ ] [Реестр пакетов](https://docs.gitflic.space/registry/package)
-- [ ] [PyPi](https://docs.gitflic.space/registry/pypi_registry)
-- [ ] [Generic](https://docs.gitflic.space/registry/generic_registry)
-- [ ] [Maven](https://docs.gitflic.space/registry/maven_registry)
-- [ ] [Docker](https://docs.gitflic.space/registry/docker)
-
-## Компании
-- [ ] [Создание компании](https://docs.gitflic.space/company/create)
-- [ ] [Обзор компании](https://docs.gitflic.space/company/view)
-- [ ] [Тарифы и оплата](https://docs.gitflic.space/company/price)
-- [ ] [Запуск агента компании](https://docs.gitflic.space/company/saas_runner_setup)
-
-## CI/CD
-- [ ] [Что такое GitFlic CI/CD](https://docs.gitflic.space/cicd/introduction)
-- [ ] [Задача (Job)](https://docs.gitflic.space/cicd/job)
-- [ ] [Конвейер (pipeline)](https://docs.gitflic.space/cicd/pipeline)
-- [ ] [Агенты](https://docs.gitflic.space/cicd/agent)
-- [ ] [Справочник для .yaml файла](https://docs.gitflic.space/cicd/gitflic-ci-yaml)
-
-## API
-- [ ] [Введение в GitFlic API](https://docs.gitflic.space/api/intro)
-- [ ] [Методы для администратора](https://docs.gitflic.space/api/admin)
-- [ ] [Получение access токена](https://docs.gitflic.space/api/access-token)
-
-
-## Панель администратора
-- [ ] [Панель администратора](https://docs.gitflic.space/admin_panel/intro)
-- [ ] [Панель управления](https://docs.gitflic.space/admin_panel/dashboard)
-- [ ] [Настройка LDAP](https://docs.gitflic.space/admin_panel/ldap)
-- [ ] [Ключевые настройки](https://docs.gitflic.space/admin_panel/settings)
-
-## Общая информация
-- [ ] [Глоссарий](https://docs.gitflic.space/common/gloss)
-- [ ] [Права доступа ролей](https://docs.gitflic.space/common/manage_roles)
-- [ ] [Вебхуки](https://docs.gitflic.space/common/webhook)
++ en.stm32cubemx-lin-v6-12-1.zip
+	- magnet:?xt=urn:btih:374a10d3fad63262c2cbc5e48dba8c401278040d&dn=en.stm32cubemx-lin-v6-12-1.zip
+	- magnet:?xt=urn:btih:e3f3c7b4f79ac47cd922e74b19ff057ebbc15f85&dn=um1718-stm32cubemx-for-stm32-configuration-and-initialization-c-code-generation-stmicroelectronics.pdf
+- stm32cube_fw_f0
+	- magnet:?xt=urn:btih:30ed78753ddd8a7170a1e701fa7ee1a5e0d1fb7f&dn=stm32cube%5Ffw%5Ff0%5Fv1110.zip
+	- magnet:?xt=urn:btih:1966308b2e68f3112518cd53db54b9090df73deb&dn=stm32cube%5Ffw%5Ff0%5Fv1115.zip
+- stm32cube_fw_f1
+	- magnet:?xt=urn:btih:60a06d81dcdd45ef828bba3167fa5df0fe6b881c&dn=stm32cube%5Ffw%5Ff1%5Fv180.zip
+	- magnet:?xt=urn:btih:c7f275b88af9c79e6a7237418290e4192762066e&dn=stm32cube%5Ffw%5Ff1%5Fv186.zip
+- stm32cube_fw_l4
+	- stm32cube_fw_l4_v1180.zip
+		- magnet:?xt=urn:btih:3a510c426242a34b4463f6ea34c2759d4b28af02&dn=stm32cube%5Ffw%5Fl4%5Fv1180.zip
+	- stm32cube_fw_l4_v1181.zip
+		- magnet:?xt=urn:btih:83dcfc663dbbc31bdea441f019f12fe8898b73f4&dn=stm32cube%5Ffw%5Fl4%5Fv1181.zip
