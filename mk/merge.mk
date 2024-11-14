@@ -1,5 +1,5 @@
 # merge
-MERGE += README.md LICENSE Makefile apt.txt .clang-format .doxygen
+MERGE += README.md LICENSE Makefile apt.* .clang-format .doxygen
 MERGE += .vscode bin doc lib inc src tmp ref mk
 MERGE += hw cpu arch os
 
@@ -20,7 +20,7 @@ $(USER):
 release:
 	git tag $(NOW)-$(REL)
 	git push -v --tags
-	$(MAKE) $(USER)
+# $(MAKE) $(USER)
 
 ZIP = tmp/$(MODULE)_$(NOW)_$(REL)_$(BRANCH).zip
 zip: $(ZIP)
