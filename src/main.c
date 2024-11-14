@@ -10,10 +10,3 @@ int main(int argc, char *argv[]) {  //
 void arg(int argc, char *argv) {  //
     fprintf(stderr, "arg[%i] = <%s>\n", argc, argv);
 }
-
-#include "parser.h"
-
-void yyerror(const char *msg) {
-    fprintf(stderr, "\n\n%s:%i %s [%s]\n", yyfile, yylineno, msg, yytext);
-    exit(-1);
-}
