@@ -1,0 +1,9 @@
+*~
+*.swp
+*.log
+*.dump
+*.o
+*.exe
+/docs/
+/doc/html/
+!.gitignore
