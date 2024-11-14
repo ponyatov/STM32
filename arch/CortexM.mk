@@ -1,5 +1,5 @@
 TARGET = arm-none-eabi
-APT   += gcc-$(TARGET) gdb-multiarch stlink-tools qemu-system-arm
+APT   += gcc-$(TARGET) gdb-multiarch stlink-tools dfu-util qemu-system-arm
 OS    ?= _
 
 # tool: CubeMX binary path
