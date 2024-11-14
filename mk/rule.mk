@@ -1,6 +1,6 @@
 # rule
 
-OBJ += $(patsubst %.c,%.o,$(C))
+OBJ += $(patsubst $(SRC)/%.c,$(TMP)/%.o,$(C))
 
 bin/$(MODULE): $(OBJ)
 	$(TCC) $(TFLAGS) -o $@ $^ $(L)
@@ -16,3 +16,11 @@ $(TMP)/%.lexer.c: $(SRC)/%.lex
 $(TMP)/%.parser.c: $(SRC)/%.yacc
 	bison -o $@ $<
 endif
+
+# readline
+.PHONY: microrl
+microrl: $(SRC)/microrl.c $(INC)/microrl.h $(INC)/config.h
+$(SRC)/%.c: $(REF)/microrl/src/%.c $(INC)/%.h $(INC)/config.h
+	cp $< $@
+$(INC)/%.h: $(REF)/microrl/src/%.h
+	cp $< $@
