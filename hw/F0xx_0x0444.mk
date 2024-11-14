@@ -1,1 +1,1 @@
-HW = pill
+HW = pillF030

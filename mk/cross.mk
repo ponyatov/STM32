@@ -4,7 +4,7 @@ HWINFO = tmp/hw.info
 ifeq (,$(wildcard $(HWINFO)))
 .PHONY: hwinfo
 hwinfo: $(HWINFO)
-DESCR = $(subst small,,$(subst /,_,$(shell st-info --descr)))
+DESCR = $(firstword $(subst /, ,$(shell st-info --descr)))
 $(HWINFO):
 	echo "STVER  ?= $(shell st-info --version)"  > $@
 	echo "FLASH  ?= $(shell st-info --flash  )" >> $@
