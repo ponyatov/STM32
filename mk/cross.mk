@@ -19,7 +19,9 @@ include   hw/$(HW).mk
 include  cpu/$(CPU).mk
 include arch/$(ARCH).mk
 
+# cross-compiler
 TCC   = $(TARGET)-gcc
-TCXX  = $(TARGET)-g++
+TXX   = $(TARGET)-g++
+TDUMP = $(TARGET)-objdump
 TSIZE = $(TARGET)-size
-TOBJ  = $(TARGET)-objcopy
+TCOPY = $(TARGET)-objcopy
