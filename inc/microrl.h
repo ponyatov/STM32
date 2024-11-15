@@ -1,3 +1,9 @@
+/// @defgroup microrl microrl
+/// @ingroup lib
+/// @brief readline for embedded
+/// @details dirt fork based on https://github.com/Helius/microrl.git
+/// @{
+
 #ifndef _MICRORL_H_
 #define _MICRORL_H_
 
@@ -24,7 +30,8 @@
 #define KEY_SO 14  /**< ^N Shift Out, alternate character set */
 #define KEY_SI 15  /**< ^O Shift In, resume defaultn character set */
 #define KEY_DLE 16 /**< ^P Data link escape */
-#define KEY_DC1 17 /**< ^Q XON, with XOFF to pause listings; "okay to send". \
+#define KEY_DC1                                                              \
+    17             /**< ^Q XON, with XOFF to pause listings; "okay to send". \
                     */
 #define KEY_DC2 18 /**< ^R Device control 2, block-mode flow control */
 #define KEY_DC3 19 /**< ^S XOFF, with XON is TERM=18 flow control */
@@ -122,3 +129,5 @@ void microrl_set_sigint_callback(microrl_t* pThis, void (*sigintf)(void));
 void microrl_insert_char(microrl_t* pThis, int ch);
 
 #endif
+
+/// @}

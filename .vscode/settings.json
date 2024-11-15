@@ -54,15 +54,15 @@
 
     // cmake
     "cmake.configureSettings": {
-        "APP": "${workspaceFolderBasename}",
+        "MODULE": "${workspaceFolderBasename}",
         "PYTHON_DEPS_CHECKE": 1,
         "PYTHON": "python3",
         "ESP_PLATFORM": 1,
         "CCACHE_ENABLE": 0
     },
     "cmake.sourceDirectory"  : "${workspaceFolder}",
-    "cmake.buildDirectory"   : "${workspaceFolder}/tmp/build",
-	"cmake.generator"        : "Ninja", // Unix Makefiles",
+    "cmake.buildDirectory"   : "${workspaceFolder}/tmp/cmake",
+	"cmake.generator"        : "Unix Makefiles",// "Ninja",
     "cmake.configureOnOpen"  : false,
     "cmake.debugConfig"      : {
         "cwd": "${workspaceFolder}",

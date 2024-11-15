@@ -17,6 +17,9 @@ $(TMP)/%.parser.c: $(SRC)/%.yacc
 	bison -o $@ $<
 endif
 
+$(TMP)/%.c: $(SRC)/%.ragel
+	ragel -G2 -o $@ $<
+
 # readline
 .PHONY: microrl
 microrl: $(SRC)/microrl.c $(INC)/microrl.h $(INC)/config.h

@@ -4,6 +4,9 @@
 
 #include <stdio.h>
 
+/// @defgroup repl repl
+/// @brief interactive command line session (CLI)
+/// @{
 /// @defgroup parser parser
 /// @brief syntax parser
 /// @{
@@ -17,4 +20,5 @@ extern int yyparse();                  ///< parser
 extern void yyerror(const char* msg);  ///< syntax error callback
 #include "repl.parser.h"
 
+/// @}
 /// @}

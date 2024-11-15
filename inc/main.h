@@ -1,11 +1,14 @@
 #pragma none
 
+/// @defgroup lib lib
+/// @{
 /// @defgroup libc libc
-/// @brief standard headers
+/// @brief standard C/C++ headers
 /// @{
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+/// @}
 /// @}
 
 /// @defgroup main main
