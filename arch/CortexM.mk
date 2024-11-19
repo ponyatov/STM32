@@ -18,9 +18,9 @@ $(CUBEMX):
 	$(MAKE) $(CUBE_SDIR)/$(CUBE_SETUP)
 	$(CUBE_SDIR)/$(CUBE_SETUP)
 
-$(CUBE_SDIR)/$(CUBE_SETUP): $(CROSS)/$(CUBEMX_GZ)
+$(CUBE_SDIR)/$(CUBE_SETUP): $(DISTR)/$(CUBEMX_GZ)
 	unzip -d $(CUBE_SDIR) $< && touch $@
 
-GZ += $(CROSS)/$(CUBEMX_GZ)
-$(CROSS)/$(CUBEMX_GZ):
+GZ += $(DISTR)/$(CUBEMX_GZ)
+$(DISTR)/$(CUBEMX_GZ):
 	$(CURL) $@ $(CUBEMX_URL)/$(subst .,-,$(CUBEMX_GZ))

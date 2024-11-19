@@ -1,7 +1,7 @@
 # dirs
 CWD   = $(CURDIR)
 ifneq (,$(wildcard $(HOME)/distr/cross))
-CROSS = $(HOME)/distr/cross
+DISTR = $(HOME)/distr/cross
 endif
 BIN   = $(CWD)/bin
 LIB   = $(CWD)/lib

@@ -25,5 +25,11 @@
             "command": "make dev",
             "problemMatcher": []
         },
+        {
+            "label": "cmake: build",
+            "type": "shell",
+            "command": "make build",
+            "problemMatcher": []
+        },
     ]
 }

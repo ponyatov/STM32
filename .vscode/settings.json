@@ -7,7 +7,7 @@
         { "command": "multiCommand.f12",
             "sequence": [ "workbench.action.files.saveAll",
                 { "command": "workbench.action.terminal.sendSequence",
-                    "args": {"text": "\u000D clear ; LANG=C make all \u000D"}}]},
+                    "args": {"text": "\u000D clear ; LANG=C make cpp \u000D"}}]},
         { "command": "multiCommand.altx",
             "sequence": [ "workbench.action.files.saveAll",
                 { "command": "workbench.action.terminal.sendSequence",
@@ -21,13 +21,15 @@
     // files
     "files.exclude": {
         "docs/**": true,
+        "doc/html/**": true,
     },
     "files.watcherExclude": {
         "ref/**": true,
     },
     "files.associations": {
         "lib/*.ini": "flic", "lib/.f": "flic",
-        "*.mk": "makefile", "tmp/hw.info": "makefile"
+        "*.mk": "makefile", "hw.info": "makefile",
+        "*.ioc": "ini"
     },
 
     // editor
@@ -45,37 +47,48 @@
     "terminal.integrated.copyOnSelection": true,
     // "editor.inlayHints.enabled": "offUnlessPressed",
 
+    // clang-format
+    "clang-format.executable":     "clang-format",
+    "clang-format.fallbackStyle":  "Google",
+    "clang-format.style":          "file",
+
     // C++
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.formatOnSave":     false
+    },
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.formatOnSave":     false
     },
-    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    // "C_Cpp.intelliSenseEngine": "Tag Parser",
+
+    "debug.onTaskErrors": "prompt",
 
     // cmake
     "cmake.configureSettings": {
-        "MODULE": "${workspaceFolderBasename}",
-        "PYTHON_DEPS_CHECKE": 1,
-        "PYTHON": "python3",
-        "ESP_PLATFORM": 1,
-        "CCACHE_ENABLE": 0
+        // "MODULE": "${workspaceFolderBasename}",
+        // "PYTHON_DEPS_CHECKE": 1,
+        // "PYTHON": "python3",
+        // "ESP_PLATFORM": 1,
+        // "CCACHE_ENABLE": 0
     },
     "cmake.sourceDirectory"  : "${workspaceFolder}",
-    "cmake.buildDirectory"   : "${workspaceFolder}/tmp/cmake",
+    "cmake.buildDirectory"   : "${workspaceFolder}/tmp/${workspaceFolderBasename}",
 	"cmake.generator"        : "Unix Makefiles",// "Ninja",
-    "cmake.configureOnOpen"  : false,
-    "cmake.debugConfig"      : {
-        "cwd": "${workspaceFolder}",
-		"args": [
-"${workspaceFolder}/lib/${workspaceFolderBasename}.ini"
-        ]},
+    // "cmake.configureOnOpen"  : false,
+    // "cmake.debugConfig"      : {
+        // "cwd": "${workspaceFolder}",
+		// "args": ["${workspaceFolder}/lib/${workspaceFolderBasename}.ini"]},
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 
-    // ESP32
-    "idf.adapterTargetName": "esp32",
-    "idf.pythonBinPath": "${env:IDF_PYTHON_ENV_PATH}/bin/python3",
-    "idf.buildPath": "${workspaceFolder}/tmp/build",
-    "idf.port": "/dev/ttyUSB0",
-    "idf.flashType": "UART",
-    "idf.flashBaudRate": "1000000",
+    "cortex-debug.variableUseNaturalFormat": false,
+
+    // // ESP32
+    // "idf.adapterTargetName": "esp32",
+    // "idf.pythonBinPath": "${env:IDF_PYTHON_ENV_PATH}/bin/python3",
+    // "idf.buildPath": "${workspaceFolder}/tmp/build",
+    // "idf.port": "/dev/ttyUSB0",
+    // "idf.flashType": "UART",
+    // "idf.flashBaudRate": "1000000",
 }

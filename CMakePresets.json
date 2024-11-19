@@ -1,0 +1,58 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "common",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/tmp/${presetName}",
+            "generator": "Unix Makefiles",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/bin/${presetName}",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "cortexM",
+            "hidden": true,
+            "inherits": "common",
+            "toolchainFile": "${sourceDir}/cmake/arm-none-eabi-gcc.cmake",
+            "cacheVariables": {
+                "WARN":       "-Wall -Wextra -Wpedantic",
+                "FSECTIONS":  "-fdata-sections -ffunction-sections",
+                "GCSECTIONS": "-Wl,--gc-sections",
+                "CMAKE_VERBOSE_MAKEFILE": true}
+        },
+        {
+            "name": "cortexM4",
+            "hidden": true,
+            "inherits": "cortexM",
+            "cacheVariables": {
+                "MCPU": "-mcpu=cortex-m4",
+                "MFPU": "-mfpu=fpv4-sp-d16 -mfloat-abi=hard"
+            }
+        },
+        {
+            "name": "STM32F407G-DISC1",
+            "inherits": "cortexM4",
+            "cacheVariables": {"HW":"STM32F407G-DISC1","CPU":"STM32F407VGT"}
+        },
+        {
+            "name": "linux",
+            "displayName": "host: GCC 12.2.0 x86_64-linux-gnu",
+            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "toolchainFile": "${sourceDir}/cmake/x86_64-linux-gnu.cmake",
+            "inherits": "common",
+            "cacheVariables": {}
+        },
+        {
+            "name": "win32",
+            "displayName": "GCC 12-win32 i686-w64-mingw32",
+            "description": "retro Windows x32 cross-compiling",
+            "binaryDir": "${sourceDir}/tmp/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/i686-w64-mingw32-win32.cmake",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/bin/${presetName}",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }    ]
+}
