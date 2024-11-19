@@ -10,3 +10,13 @@ CUBEF3_URL = $(STM32GIT)/STM32CubeF3/$(STM32REFS)
 CUBEF4_URL = $(STM32GIT)/STM32CubeF4/$(STM32REFS)
 CUBEL4_URL = $(STM32GIT)/STM32CubeL4/$(STM32REFS)
 CUBEH7_URL = $(STM32GIT)/STM32CubeH7/$(STM32REFS)
+
+GZ += $(DISTR)/SVD/stm32f0_svd.zip
+$(DISTR)/SVD/stm32f0_svd.zip:
+	$(CURL) $@ https://www.st.com/resource/en/svd/stm32f0_svd.zip
+GZ += $(DISTR)/SVD/stm32f1_svd.zip
+$(DISTR)/SVD/stm32f1_svd.zip:
+	$(CURL) $@ https://www.st.com/resource/en/svd/stm32f1_svd.zip
+GZ += $(DISTR)/SVD/stm32f4_svd.zip
+$(DISTR)/SVD/stm32f4_svd.zip:
+	$(CURL) $@ https://www.st.com/resource/en/svd/stm32f4_svd.zip
