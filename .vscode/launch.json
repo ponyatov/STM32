@@ -5,25 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "stm32f4discovery",
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "request": "launch",
+            "name": "STM32F407G-DISC1",
+            "type": "gdb",
+            "request": "attach",
             "executable": "${workspaceFolder}/tmp/STM32F407G-DISC1/${workspaceFolderBasename}.elf",
-            "gdbPath": "/usr/bin/gdb-multiarch",
-            "toolchainPrefix": "arm-none-eabi",
-            // "preLaunchTask": "espruino: STM32F4DISCOVERY",
-            "svdFile": "${userHome}/stm32/hw/svd/stm32f4/STM32F407.svd",
-            "runToEntryPoint": "Reset_Handler",
-            "postLaunchCommands": [ "interrupt" ],
-            "configFiles": [
-                // "board/stm32f4discovery.cfg",
-                "interface/stlink-v2.cfg",
-                // "interface/stlink.cfg",
-                "target/stm32f4x.cfg",
-                "hw/STM32F4DISCOVERY.cfg"
+            "target": ":12345",
+            "remote": true,
+            "gdbpath": "/usr/bin/gdb-multiarch",
+            "cwd": "${workspaceRoot}",
+            // "preLaunchTask": "CMake: STM32F407G-DISC1",
+            "autorun": [
+                "b Reset_Handler"
+                ,"b main"
+                ,"monitor reset halt"
             ]
-            // ,"showDevDebugOutput": "raw"
         }
     ]
 }

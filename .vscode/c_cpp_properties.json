@@ -7,20 +7,18 @@
                 "${workspaceFolder}/inc/**",
                 "${workspaceFolder}/tmp/**",
                 "${workspaceFolder}/src/**",
-                "${workspaceFolder}/targetlibs/stm32f4/lib",
-                "${workspaceFolder}/gen",
-                "${workspaceFolder}/targetlibs/stm32usb",
-                "${workspaceFolder}/targetlibs/stm32usb/Inc",
                 "${workspaceFolder}/hw/STM32F407G-DISC1/Drivers/CMSIS/Include",
                 "${workspaceFolder}/hw/STM32F407G-DISC1/Drivers/CMSIS/Device/ST/STM32F4xx/Include"
             ],
             "forcedInclude": [
                 "${workspaceFolder}/hw/STM32F407G-DISC1/Drivers/CMSIS/Include/core_cm4.h"
             ],
-            "defines": [],
+            "defines": [
+                "STM32F407xx"
+            ],
             "cStandard": "c11",
-            "cppStandard": "c++11",
-            "intelliSenseMode": "linux-gcc-arm",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
             "compilerPath": "/usr/bin/arm-none-eabi-gcc"
         }
     ]

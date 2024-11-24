@@ -4,6 +4,7 @@ PROJECT_LOGO           = doc/logo.png
 HTML_OUTPUT            = doc/html
 OUTPUT_DIRECTORY       =
 INPUT                  = README.md inc src doc
+INCLUDE_PATH           = inc
 EXCLUDE                = ref/* *.pdf *.djvu
 WARN_IF_UNDOCUMENTED   = NO
 RECURSIVE              = YES
